@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grand Wedding | Mohan & Sangita</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN for standalone file) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --c-maroon: #3A0B13;
+            --c-maroon-light: #5C1220;
+            --c-gold: #D4AF37;
+            --c-gold-light: #F3E5AB;
+            --c-ivory: #FAF9F6;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--c-ivory);
+            color: var(--c-maroon);
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+        }
+
+        .font-hindi { font-family: 'Tiro Devanagari Hindi', serif; }
+        .font-cinzel { font-family: 'Cinzel Decorative', serif; }
+
+        .bg-noise {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            opacity: 0.05;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .mandala-spin { animation: spin 80s linear infinite; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--c-maroon); }
+        ::-webkit-scrollbar-thumb { background: var(--c-gold); border-radius: 4px; }
+
+        /* Scroll Reveal Animation Classes */
+        .fade-in {
+            transition: all 1000ms ease-out;
+            opacity: 0;
+        }
+        .fade-in.dir-up { transform: translateY(3rem); }
+        .fade-in.dir-down { transform: translateY(-3rem); }
+        .fade-in.dir-left { transform: translateX(3rem); }
+        .fade-in.dir-right { transform: translateX(-3rem); }
+        .fade-in.dir-scale { transform: scale(0.95); }
+        
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen selection:bg-[#D4AF37] selection:text-[#3A0B13]">
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="fixed top-0 left-0 pointer-events-none z-[100] transition-transform duration-100 ease-out mix-blend-screen hidden md:block">
+        <div id="cursor-inner" class="relative flex items-center justify-center transition-all duration-300 scale-100">
+            <div class="absolute w-8 h-8 bg-[#D4AF37] rounded-full blur-[16px] opacity-40"></div>
+            <div class="w-2 h-2 bg-[#FFDF73] rounded-full shadow-[0_0_10px_#FFDF73]"></div>
+        </div>
+    </div>
+
+    <!-- Backgrounds & Overlays -->
+    <div class="bg-noise"></div>
+    <div id="particles-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden"></div>
+    
+    <audio id="bg-audio" loop src="Indian 1.wav"></audio>
+
+    <!-- Persistent Royal Frame -->
+    <div class="fixed inset-3 md:inset-5 border-[1px] border-[#D4AF37]/30 pointer-events-none z-40 rounded-sm">
+        <div class="absolute top-0 left-0 w-8 h-8 md:w-16 md:h-16 border-t-[3px] border-l-[3px] border-[#D4AF37] -translate-x-[1px] -translate-y-[1px]"></div>
+        <div class="absolute top-0 right-0 w-8 h-8 md:w-16 md:h-16 border-t-[3px] border-r-[3px] border-[#D4AF37] translate-x-[1px] -translate-y-[1px]"></div>
+        <div class="absolute bottom-0 left-0 w-8 h-8 md:w-16 md:h-16 border-b-[3px] border-l-[3px] border-[#D4AF37] -translate-x-[1px] translate-y-[1px]"></div>
+        <div class="absolute bottom-0 right-0 w-8 h-8 md:w-16 md:h-16 border-b-[3px] border-r-[3px] border-[#D4AF37] translate-x-[1px] translate-y-[1px]"></div>
+    </div>
+    <div class="fixed inset-4 md:inset-6 border-[1px] border-[#D4AF37]/10 pointer-events-none z-40 rounded-sm"></div>
+
+    <!-- Floating Controls (Visible after enter) -->
+    <div id="main-controls" class="fixed bottom-8 right-8 z-50 flex-col gap-4 hidden">
+        <button onclick="toggleLang()" class="p-4 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] flex items-center justify-center font-cinzel text-sm font-bold" title="Switch Language">
+            <span id="lang-indicator">EN</span>
+        </button>
+        <button onclick="toggleMusic()" class="p-4 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+            <i data-lucide="music-2" id="music-icon" class="w-5 h-5 animate-pulse"></i>
+        </button>
+    </div>
+
+    <!-- Language Switcher on Splash Screen -->
+    <button id="splash-lang-btn" onclick="toggleLang()" class="absolute top-8 right-8 z-[60] px-4 py-2 rounded-full border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 flex items-center gap-3 bg-[#3A0B13]/50 backdrop-blur-sm shadow-lg">
+        <i data-lucide="languages" class="w-4 h-4"></i>
+        <div class="flex items-center gap-2 text-sm">
+            <span id="splash-en" class="font-cinzel opacity-50">EN</span>
+            <span class="w-px h-3 bg-[#D4AF37]/50"></span>
+            <span id="splash-hi" class="font-hindi font-bold opacity-100">हि</span>
+        </div>
+    </button>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#3A0B13] transition-all duration-[1500ms] ease-in-out opacity-100">
+        <!-- Glowing mandala -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 overflow-hidden">
+            <svg class="w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] text-[#D4AF37] mandala-spin" viewBox="0 0 100 100">
+                <path fill="currentColor" d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" />
+                <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="0.5" />
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.2" />
+            </svg>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center text-center px-6">
+            <div class="text-[#D4AF37] mb-6 animate-pulse">
+                <i data-lucide="sparkles" class="w-8 h-8 md:w-12 md:h-12" stroke-width="1"></i>
+            </div>
+            
+            <h2 id="t-ganesh" class="dyn-font font-hindi text-xl md:text-3xl text-[#D4AF37] mb-6 tracking-widest opacity-90">|| श्री गणेशाय नमः ||</h2>
+            <h1 id="t-title" class="dyn-font font-hindi text-4xl md:text-6xl text-[#FAF9F6] mb-8 tracking-wide drop-shadow-lg leading-normal py-2">मंगल परिणयोत्सव</h1>
+            
+            <div class="h-px w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mb-8"></div>
+            
+            <h3 id="t-groomFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient mb-4 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal">चि. मोहन (मोनु)</h3>
+            <span class="font-cinzel text-xl text-[#FAF9F6]/60 mb-4">&</span>
+            <h3 id="t-brideFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient mb-12 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal">सौ. का. संगीता</h3>
+
+            <p id="t-inviteLine" class="dyn-font font-hindi text-lg md:text-xl text-[#FAF9F6]/80 mb-12 max-w-sm leading-relaxed">आप सपरिवार सादर आमंत्रित हैं</p>
+
+            <button onclick="handleEnter()" class="group relative px-8 py-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] overflow-hidden rounded-sm transition-all duration-500 hover:border-[#FAF9F6]" style="animation: pulse-glow 3s infinite">
+                <div class="absolute inset-0 bg-[#D4AF37] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                <span class="relative z-10 font-hindi text-lg group-hover:text-[#3A0B13] transition-colors duration-500 flex items-center gap-3 dyn-btn-font" id="t-openBtn">
+                    निमंत्रण खोलें <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="relative z-10 bg-[#FAF9F6] hidden">
+        
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[90vh] flex items-center justify-center bg-[#3A0B13] overflow-hidden rounded-b-[3rem] md:rounded-b-[5rem] shadow-2xl">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(92,18,32,0.8)_0%,rgba(58,11,19,1)_100%)]"></div>
+            <div class="absolute inset-4 border-2 border-[#D4AF37]/20 rounded-t-full opacity-30 pointer-events-none"></div>
+
+            <div class="relative z-10 text-center px-4 pt-20 pb-36 md:pb-24 mt-10 w-full max-w-4xl mx-auto">
+                <div class="fade-in dir-down" style="transition-delay: 500ms">
+                    <div class="w-16 h-16 md:w-24 md:h-24 mx-auto mb-8 border border-[#D4AF37] rounded-t-full flex items-center justify-center p-2 bg-[#5C1220]/50 backdrop-blur-sm shadow-lg">
+                        <i data-lucide="flower-2" class="text-[#D4AF37] w-8 h-8" stroke-width="1"></i>
+                    </div>
+                </div>
+                
+                <div class="fade-in dir-up" style="transition-delay: 700ms">
+                    <p id="t-withBlessings" class="dyn-font font-hindi text-xl tracking-wider text-[#D4AF37] mb-6">ईश्वर के आशीर्वाद से</p>
+                </div>
+
+                <div class="fade-in dir-scale" style="transition-delay: 900ms">
+                    <h1 class="dyn-font font-hindi text-5xl md:text-8xl text-gold-gradient mb-8 leading-normal py-2 px-4">
+                        <span id="t-groomName">मोहन</span> <br class="md:hidden" /> 
+                        <span id="t-weds" class="dyn-font font-hindi text-3xl md:text-5xl mx-4 text-[#FAF9F6]/50">संग</span> <br class="md:hidden" /> 
+                        <span id="t-brideName">संगीता</span>
+                    </h1>
+                </div>
+
+                <div class="fade-in dir-up mb-12" style="transition-delay: 1100ms">
+                    <div class="flex items-center justify-center gap-4 text-[#FAF9F6]/80 font-cinzel tracking-widest text-sm md:text-xl mt-4">
+                        <span>26</span>
+                        <div class="w-2 h-2 bg-[#D4AF37] rotate-45"></div>
+                        <span id="t-dateMonth">APRIL</span>
+                        <div class="w-2 h-2 bg-[#D4AF37] rotate-45"></div>
+                        <span>2026</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fixed Scroll Indicator to be perfectly centered despite letter tracking -->
+            <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 animate-bounce opacity-70">
+                <span class="font-cinzel text-[#D4AF37] text-xs tracking-widest pl-[0.1em]">SCROLL</span>
+                <div class="w-[1px] h-12 bg-gradient-to-b from-[#D4AF37] to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: FAMILY -->
+        <section class="py-20 md:py-32 px-6 relative">
+            <div class="max-w-5xl mx-auto text-center">
+                <div class="fade-in dir-up">
+                    <div class="flex items-center justify-center gap-4 mb-16">
+                        <div class="h-px w-12 md:w-24 bg-[#D4AF37]"></div>
+                        <h2 id="t-introTitle" class="dyn-font font-hindi text-3xl md:text-5xl text-[#3A0B13]">परिचय</h2>
+                        <div class="h-px w-12 md:w-24 bg-[#D4AF37]"></div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start relative">
+                    <!-- Groom -->
+                    <div class="fade-in dir-right relative z-10 bg-white p-8 md:p-12 border border-[#D4AF37]/30 rounded-t-full rounded-b-md shadow-2xl shadow-[#3A0B13]/5" style="transition-delay: 200ms">
+                        <div class="mb-6 flex justify-center text-[#D4AF37]"><i data-lucide="star" class="w-8 h-8" stroke-width="1"></i></div>
+                        
+                        <p id="t-groomGrandparents" class="dyn-font font-hindi text-sm md:text-base text-[#3A0B13]/80 mb-1 font-semibold whitespace-pre-line"></p>
+                        <p id="t-groomTag" class="dyn-font font-hindi text-[#D4AF37] text-sm md:text-base font-bold mb-4"></p>
+
+                        <h3 id="t-groomFullNameCard" class="dyn-font font-hindi text-2xl md:text-3xl text-[#3A0B13] mb-2 font-bold py-1">चि. मोहन (मोनु)</h3>
+                        <div class="w-16 h-px bg-[#D4AF37] mx-auto my-6"></div>
+                        <p id="t-groomParents" class="dyn-font font-hindi text-base md:text-lg text-[#3A0B13]/80 leading-relaxed whitespace-pre-line"></p>
+                    </div>
+
+                    <div class="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0">
+                        <div class="w-px h-[80%] min-h-[300px] bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                    </div>
+
+                    <!-- Bride -->
+                    <div class="fade-in dir-left relative z-10 bg-white p-8 md:p-12 border border-[#D4AF37]/30 rounded-t-full rounded-b-md shadow-2xl shadow-[#3A0B13]/5" style="transition-delay: 400ms">
+                        <div class="mb-6 flex justify-center text-[#D4AF37]"><i data-lucide="heart" class="w-8 h-8" stroke-width="1"></i></div>
+                        
+                        <p id="t-brideGrandparents" class="dyn-font font-hindi text-sm md:text-base text-[#3A0B13]/80 mb-1 font-semibold whitespace-pre-line"></p>
+                        <p id="t-brideTag" class="dyn-font font-hindi text-[#D4AF37] text-sm md:text-base font-bold mb-4"></p>
+
+                        <h3 id="t-brideFullNameCard" class="dyn-font font-hindi text-2xl md:text-3xl text-[#3A0B13] mb-2 font-bold py-1">सौ. का. संगीता</h3>
+                        <div class="w-16 h-px bg-[#D4AF37] mx-auto my-6"></div>
+                        <p id="t-brideParents" class="dyn-font font-hindi text-base md:text-lg text-[#3A0B13]/80 leading-relaxed whitespace-pre-line"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EVENTS -->
+        <section class="py-24 md:py-32 bg-[#3A0B13] text-[#FAF9F6] relative border-y-[6px] border-[#D4AF37] border-double">
+            <div class="absolute inset-0 bg-noise opacity-10"></div>
+            <div class="max-w-5xl mx-auto px-6 relative z-10">
+                <div class="fade-in dir-up text-center mb-20">
+                    <h2 id="t-eventsTitle" class="dyn-font font-hindi text-4xl md:text-5xl text-gold-gradient mb-6 leading-normal py-2">मांगलिक कार्यक्रम</h2>
+                    <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto"></div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#D4AF37]/40 to-transparent -translate-x-1/2"></div>
+                    <div id="events-container" class="space-y-12 md:space-y-20">
+                        <!-- Events populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: NAMES & BAAL MANUHAAR -->
+        <section class="py-20 md:py-32 px-6 bg-[#FAF9F6] relative border-b border-[#D4AF37]/20">
+            <div class="absolute inset-0 bg-noise opacity-10"></div>
+            
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 items-start">
+                    
+                    <!-- Left Column: Vineet & Darshanabhilashi -->
+                    <div class="col-span-1 md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left space-y-12 md:space-y-16 w-full">
+                        <div class="fade-in dir-right w-full px-2 md:px-0">
+                            <h3 id="t-vineetTitle" class="dyn-font font-hindi text-2xl md:text-3xl text-[#D4AF37] mb-4 md:mb-6 drop-shadow-sm">विनीत:</h3>
+                            <p id="t-vineetNames" class="dyn-font font-hindi text-base md:text-lg text-[#3A0B13]/90 leading-relaxed whitespace-pre-line font-medium"></p>
+                        </div>
+                        
+                        <div class="fade-in dir-right w-full px-2 md:px-0" style="transition-delay: 200ms">
+                            <h3 id="t-darshanTitle" class="dyn-font font-hindi text-2xl md:text-3xl text-[#D4AF37] mb-4 md:mb-6 drop-shadow-sm">दर्शनाभिलाषी:</h3>
+                            <p id="t-darshanNames" class="dyn-font font-hindi text-base md:text-lg text-[#3A0B13]/90 leading-relaxed whitespace-pre-line font-medium"></p>
+                        </div>
+                    </div>
+
+                    <!-- Center Divider -->
+                    <div class="hidden md:block md:col-span-2 relative h-full min-h-[400px]">
+                        <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-b from-transparent via-[#D4AF37] to-transparent"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FAF9F6] py-4">
+                            <i data-lucide="star" class="w-6 h-6 text-[#D4AF37] opacity-50"></i>
+                        </div>
+                    </div>
+
+                    <div class="md:hidden col-span-1 w-full flex justify-center py-4">
+                        <div class="h-px w-40 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent"></div>
+                    </div>
+
+                    <!-- Right Column: Aagrah & Nanihal -->
+                    <div class="col-span-1 md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left space-y-12 md:space-y-16 w-full">
+                        <div class="fade-in dir-left w-full px-2 md:px-0" style="transition-delay: 400ms">
+                            <h3 id="t-aagrahTitle" class="dyn-font font-hindi text-2xl md:text-3xl text-[#D4AF37] mb-4 md:mb-6 drop-shadow-sm">विशेष आग्रह:</h3>
+                            <p id="t-aagrahNames" class="dyn-font font-hindi text-sm md:text-lg text-[#3A0B13]/90 leading-[2.2] whitespace-pre-line font-medium"></p>
+                        </div>
+
+                        <!-- Nanihal Paksh Added Here -->
+                        <div class="fade-in dir-left w-full px-2 md:px-0" style="transition-delay: 500ms">
+                            <h3 id="t-nanihalTitle" class="dyn-font font-hindi text-2xl md:text-3xl text-[#D4AF37] mb-4 md:mb-6 drop-shadow-sm">ननिहाल पक्ष:</h3>
+                            <p id="t-nanihalNames" class="dyn-font font-hindi text-sm md:text-lg text-[#3A0B13]/90 leading-[2.2] whitespace-pre-line font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in dir-up mt-24 md:mt-32 text-center bg-[#FAF9F6] border-2 border-[#D4AF37]/30 p-8 md:p-16 rounded-3xl relative shadow-[0_10px_40px_rgba(212,175,55,0.05)] overflow-visible group" style="transition-delay: 600ms">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05)_0%,transparent_100%)] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    
+                    <!-- Fixed perfectly centered badge intersecting the top border -->
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FAF9F6] px-6 md:px-8 py-2 md:py-3 rounded-full border-2 border-[#D4AF37]/30 z-20 flex items-center justify-center">
+                        <i data-lucide="heart" class="w-6 h-6 md:w-8 md:h-8 text-[#D4AF37] fill-[#D4AF37]/20 animate-pulse"></i>
+                    </div>
+                    
+                    <div class="relative z-10 pt-4 md:pt-6">
+                        <h3 class="dyn-font font-hindi text-3xl md:text-5xl text-[#3A0B13] mb-6 md:mb-8 mt-4 md:mt-0 font-bold tracking-wide">
+                            ~ <span id="t-baalTitle">बाल मनुहार</span> ~
+                        </h3>
+                        
+                        <p id="t-baalPoem" class="dyn-font font-hindi text-lg md:text-3xl text-[#3A0B13] mb-8 md:mb-10 italic leading-relaxed drop-shadow-sm px-2"></p>
+                        
+                        <div class="flex items-center justify-center gap-4 mb-8 md:mb-10">
+                            <div class="h-px w-12 md:w-16 bg-[#D4AF37]/50"></div>
+                            <i data-lucide="sparkles" class="w-4 h-4 md:w-5 md:h-5 text-[#D4AF37]"></i>
+                            <div class="h-px w-12 md:w-16 bg-[#D4AF37]/50"></div>
+                        </div>
+                        <p id="t-baalNames" class="dyn-font font-hindi text-base md:text-2xl text-[#3A0B13]/80 leading-relaxed font-bold"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: VENUE -->
+        <section class="py-24 md:py-32 px-6 bg-[#FAF9F6] relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2"></div>
+            
+            <div class="max-w-5xl mx-auto text-center relative z-10">
+                <div class="fade-in dir-up">
+                    <div class="inline-flex items-center justify-center p-5 rounded-full border border-[#D4AF37] bg-white mb-8 shadow-xl shadow-[#D4AF37]/10">
+                        <i data-lucide="map-pin" class="w-8 h-8 text-[#3A0B13]" stroke-width="1.5"></i>
+                    </div>
+                    <h2 id="t-venueTitle" class="dyn-font font-hindi text-4xl md:text-5xl text-[#3A0B13] mb-6">विवाह स्थल</h2>
+                    <h3 id="t-venueAddress" class="dyn-font font-hindi text-2xl md:text-3xl text-[#3A0B13]/80 mb-12 max-w-2xl mx-auto leading-relaxed"></h3>
+                </div>
+
+                <div class="fade-in dir-up rounded-2xl overflow-hidden border-[6px] border-[#3A0B13] shadow-2xl shadow-[#3A0B13]/20 h-[300px] md:h-[450px] relative group" style="transition-delay: 200ms">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115408.06648792276!2d75.74868265000001!3d25.174244249999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f9b30c41bb44d%3A0x5f5c103200045588!2sKota%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1714561234567!5m2!1sen!2sin" width="100%" height="100%" style="border: 0; filter: grayscale(0.3) contrast(1.1) sepia(0.2);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Wedding Venue Location"></iframe>
+                    <div class="absolute inset-0 bg-[#3A0B13]/0 group-hover:bg-[#3A0B13]/10 transition-colors duration-300 pointer-events-none"></div>
+                    <a href="https://maps.google.com/?q=Kanchan+Vatika,+Indra+Colony" target="_blank" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[#3A0B13] text-[#FAF9F6] px-8 py-4 rounded-sm flex items-center gap-3 hover:bg-[#5C1220] transition-colors border border-[#D4AF37] pointer-events-auto shadow-2xl dyn-btn-font">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i> <span id="t-getDirections">रास्ता देखें</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SPECIAL NOTE -->
+        <section class="py-24 md:py-32 px-6 bg-[#3A0B13] text-center relative border-t-[1px] border-[#D4AF37]/30">
+            <div class="max-w-4xl mx-auto">
+                <div class="fade-in dir-up">
+                    <div class="text-[#D4AF37] mb-10 flex justify-center">
+                        <i data-lucide="flower-2" class="w-12 h-12 opacity-80" stroke-width="1"></i>
+                    </div>
+                    <h2 class="dyn-font font-hindi text-3xl md:text-5xl leading-relaxed text-[#FAF9F6] drop-shadow-md font-normal">
+                        "<span id="t-note1"></span><br class="hidden md:block"/>
+                        <span id="t-note2"></span> <br/> 
+                        <span id="t-note3" class="text-gold-gradient text-4xl md:text-6xl mt-6 block py-2 leading-normal"></span>"
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: FOOTER -->
+        <footer class="bg-[#1A0508] text-[#FAF9F6] py-20 px-6 text-center relative border-t-[4px] border-[#D4AF37] border-double overflow-hidden">
+            <div class="absolute inset-0 opacity-5 flex justify-center items-center pointer-events-none">
+                <svg class="w-[150vw] md:w-[60vw] h-auto" viewBox="0 0 200 200" fill="none" stroke="#D4AF37" stroke-width="0.5">
+                    <path d="M100 0 L150 50 L100 100 L50 50 Z" />
+                    <path d="M100 50 L125 75 L100 100 L75 75 Z" />
+                    <circle cx="100" cy="100" r="40" />
+                    <circle cx="100" cy="100" r="20" />
+                </svg>
+            </div>
+
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="fade-in dir-up">
+                    <div class="flex justify-center mb-12 opacity-80">
+                        <svg width="240" height="50" viewBox="0 0 240 50" fill="none">
+                            <path d="M10 40 L30 40 L35 25 L45 25 L50 40 L70 40" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <circle cx="20" cy="45" r="5" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <circle cx="60" cy="45" r="5" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <path d="M90 40 L110 40 L110 20 C110 10 90 10 90 20 Z" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <path d="M140 45 L150 25 L160 45 M150 25 L150 15" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                            <path d="M180 40 L210 40 L210 25 L195 20 L180 25 Z" stroke="#D4AF37" stroke-width="2.5" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <h3 id="t-footerWelcome" class="dyn-font font-hindi text-3xl md:text-5xl text-[#D4AF37] mb-8 leading-tight"></h3>
+                    <div class="w-16 h-px bg-[#D4AF37]/50 mx-auto mb-10"></div>
+                    <p id="t-footerSign" class="dyn-font font-hindi text-xl md:text-2xl text-[#FAF9F6]/60 leading-relaxed mb-4"></p>
+                    <p id="t-footerFamily" class="dyn-font font-hindi text-2xl md:text-4xl font-bold text-[#FAF9F6] drop-shadow-md py-1"></p>
+                    
+                    <div class="mt-20 pt-8 border-t border-[#D4AF37]/20 flex flex-col items-center">
+                        <span id="t-crafted" class="font-cinzel text-xs text-[#D4AF37]/60 tracking-[0.4em]"></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- App Logic -->
+    <script>
+        // Translations Dictionary
+        const content = {
+            hi: {
+                ganesh: "|| श्री गणेशाय नमः ||", title: "मंगल परिणयोत्सव", inviteLine: "आप सपरिवार सादर आमंत्रित हैं", openBtn: "निमंत्रण खोलें",
+                withBlessings: "ईश्वर के आशीर्वाद से", groomName: "मोहन", brideName: "संगीता", groomFullName: "चि. मोहन (मोनु)",
+                brideFullName: "सौ. का. संगीता", groomFullNameCard: "चि. मोहन (मोनु)", brideFullNameCard: "सौ. का. संगीता", weds: "संग", dateMonth: "APRIL",
+                introTitle: "परिचय",
+                groomGrandparents: "स्व. श्रीमती कनीबाई एवं स्व. श्री रघुलाल जी जाजपुरा (प्रजापत)",
+                groomTag: "अपने सुपौत्र",
+                groomParents: "(सुपुत्र: स्व. श्रीमती गीताबाई - शिवलाल जाजपुरा)\\nनिवासी- इन्दिरा कॉलोनी, बड़ीसादड़ी",
+                brideGrandparents: "",
+                brideTag: "",
+                brideParents: "(सुपुत्री: श्रीमती ललीताबाई - श्री जगदीशजी साड़ीवाल)\\nनिवासी- पारसोली",
+                eventsTitle: "मांगलिक कार्यक्रम",
+                events: [
+                    { title: "गणपति स्थापना", date: "20-04-2026", time: "दोपहर 3 बजे", icon: "sparkles" },
+                    { title: "माताजी पूजन", date: "23-04-2026", time: "प्रातः 9 बजे", icon: "flower-2" },
+                    { title: "हल्दी / मेहंदी", date: "23-04-2026", time: "दोपहर 1 बजे", icon: "star" },
+                    { title: "बड़ा दोवड़ा", date: "24-04-2026", time: "शाम 7 बजे", icon: "heart" },
+                    { title: "बिन्दोली", date: "25-04-2026", time: "शाम 8 बजे", icon: "music" },
+                    { title: "बारात प्रस्थान", date: "26-04-2026", time: "प्रातः 7 बजे", icon: "users", description: "ब्याई जी. सा. श्री मोहनलालजी, चम्पालालजी, च. जगदीशजी, दिनेशजी, च. प्रकाशजी, गोविन्दजी साड़ीवाल (प्रजापत) निवासी- पारसोली के यहाँ जायेगी।" },
+                    { title: "शुभ विवाह", date: "26-04-2026", time: "प्रातः 8 बजे", icon: "heart", highlight: true },
+                    { title: "आशीर्वाद समारोह व स्वरुचिभोज", date: "27-04-2026", time: "सायं 5 बजे से", icon: "utensils", description: "स्थान: कंचन वाटिका, इन्दिरा कॉलोनी, बड़ीसादड़ी" }
+                ],
+                venueTitle: "विवाह स्थल", venueAddress: "कंचन वाटिका, इंद्रा कॉलोनी, बड़ोदासंडी", getDirections: "रास्ता देखें",
+                note1: "आपकी उपस्थिति हमारे लिए सौभाग्य होगी,", note2: "कृपया पधारकर नवविवाहित जोड़े को", note3: "आशीर्वाद प्रदान करें",
+                vineetTitle: "विनीत:", vineetNames: "नारायणलाल, आसीराम, मोड़ीराम, उदयलाल, डालचन्द, शिवलाल जाजपुरा\n\nनि. इन्दिरा कॉलोनी, बड़ीसादड़ी",
+                darshanTitle: "दर्शनाभिलाषी:", darshanNames: "ऊँकारलाल, नरेशकुमार, मांगीलाल, सुनिल, प्रकाश, हिरालाल, नानालाल, धर्मेन्द्र, पुष्कर, गोपाल, किशन, ललित, च. लोकेश, अक्षय, विकास, मयंक, हरिश, अमित, भूमित, योगेश, सुरज, कन्हैयालाल, प्रतिक, दक्ष, तनेश, शेखर, तरूण, लक्ष्यदीप\n\nएवं समस्त जाजपुरा (प्रजापत) परिवार।",
+                aagrahTitle: "विशेष आग्रह:", aagrahNames: "श्रीमती गंगाबाई- श्री गणेशलालजी, भाटोली बागरियान\nश्रीमती गीताबाई- श्री अम्बालालजी, धरियावद\nश्रीमती गीताबाई- श्री सुरजमलजी, चिकारड़ा\nश्रीमती मीराबाई- श्री प्रकाशजी, बोहेड़ा\nश्रीमती चन्दाबाई- श्री रमेशजी, बड़वाई\nश्रीमती ताराबाई- श्री प्रहलादजी, बम्बोरी\nश्रीमती गुड्डीबाई-श्री सुरेशजी, बोहेड़ा\nश्रीमती इन्दुबाला- श्री कमलेशजी, धरियावद\nश्रीमती ज्योतिदेवी- श्री दिनेशजी, साटोला\nश्रीमती कृष्णादेवी- श्री कमलेशजी, बान्सी\nश्रीमती हेमलता- श्री राहुलजी, चिकारड़ा\nश्रीमती टीना- श्री विष्णुजी, आलोद",
+                nanihalTitle: "ननिहाल पक्ष:", nanihalNames: "श्री बगदीरामजी, जगदीशजी, लालुरामजी, मदनजी, सुरेशजी, रामलालजी, चंद्रपालजी, प्रकाशजी, रमेशजी मारोटिया\n\nनिवासी- भीमलौद",
+                baalTitle: "बाल मनुहार", baalPoem: "छोटा सा दिल है, छोटी सी है आशा\nआप पधारें सपरिवार यही है अभिलाषा.......\nमेरे भैया व अंकल, मामा की शादी में जलूल-जलूल पधारना......",
+                baalNames: "ज्योति, प्रियंका, अंजली, विशाखा, किंजल, प्रणीता, टिंकल, पीयु, जान्हवी, मिनाक्षी, दिव्या, इन्द्रा, गुंजन, सोनपरी, अनु, जिया, प्रिन्स",
+                footerWelcome: "आपका स्वागत करने के लिए हम उत्सुक हैं", footerSign: "दर्शनाभिलाषी", footerFamily: "समस्त जगनाथ परिवार", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
+            },
+            en: {
+                ganesh: "|| Shri Ganeshay Namah ||", title: "The Grand Wedding", inviteLine: "You are cordially invited to celebrate", openBtn: "OPEN INVITATION",
+                withBlessings: "With the blessings of God", groomName: "Mohan", brideName: "Sangita", groomFullName: "Mohan Jagnath",
+                brideFullName: "Sangita", groomFullNameCard: "Mohan Jagnath", brideFullNameCard: "Sangita", weds: "WEDS", dateMonth: "APRIL",
+                introTitle: "The Families",
+                groomGrandparents: "Late Smt. Kanibai & Late Shri Raghulal Ji Jajpura (Prajapat)",
+                groomTag: "Proudly invite you to the wedding of their Grandson",
+                groomParents: "(Son of: Late Smt. Gitabai & Shivlal Jajpura)\\nRes. Indira Colony, Badi Sadari",
+                brideGrandparents: "",
+                brideTag: "",
+                brideParents: "(Daughter of: Smt. Lalitabai & Shri Jagdishji Sadiwal)\\nRes. Parsoli",
+                eventsTitle: "Wedding Celebrations",
+                events: [
+                    { title: "Ganesh Sthapana", date: "20-04-2026", time: "3:00 PM", icon: "sparkles" },
+                    { title: "Mataji Pujan", date: "23-04-2026", time: "9:00 AM", icon: "flower-2" },
+                    { title: "Haldi & Mehendi", date: "23-04-2026", time: "1:00 PM", icon: "star" },
+                    { title: "Bada Dovda", date: "24-04-2026", time: "7:00 PM", icon: "heart" },
+                    { title: "Bindoli", date: "25-04-2026", time: "8:00 PM", icon: "music" },
+                    { title: "Baraat Prasthan", date: "26-04-2026", time: "7:00 AM", icon: "users", description: "Proceeding to the residence of Shri Mohanlalji, Champalalji & family at Parsoli." },
+                    { title: "Grand Wedding", date: "26-04-2026", time: "8:00 AM", icon: "heart", highlight: true },
+                    { title: "Aashirwad & Swaruchi Bhoj", date: "27-04-2026", time: "5:00 PM Onwards", icon: "utensils", description: "Venue: Kanchan Vatika, Indira Colony, Badi Sadari" }
+                ],
+                venueTitle: "The Venue", venueAddress: "Kanchan Vatika, Indra Colony, Barodasandi", getDirections: "GET DIRECTIONS",
+                note1: "Your presence will add to our joy,", note2: "Please join us to bless the", note3: "newlywed couple",
+                vineetTitle: "Vineet:", vineetNames: "Narayanlal, Aasiram, Modiram, Udaylal, Dalchand, Shivlal Jajpura\n\nRes. Indira Colony, Badi Sadari",
+                darshanTitle: "Darshanabhilashi:", darshanNames: "Onkarlal, Nareshkumar, Mangilal, Sunil, Prakash, Hiralal, Nanalal, Dharmendra, Pushkar, Gopal, Kishan, Lalit, C. Lokesh, Akshay, Vikas, Mayank, Harish, Amit, Bhumit, Yogesh, Suraj, Kanhaiyalal, Pratik, Daksh, Tanesh, Shekhar, Tarun, Lakshyadeep\n\n& Entire Jajpura (Prajapat) Family.",
+                aagrahTitle: "Vishesh Aagrah:", aagrahNames: "Smt. Gangabai - Shri Ganeshlalji, Bhatoli Bagariyan\nSmt. Gitabai - Shri Ambalalji, Dhariyawad\nSmt. Gitabai - Shri Surajmalji, Chikarada\nSmt. Mirabai - Shri Prakashji, Boheda\nSmt. Chandabai - Shri Rameshji, Badwai\nSmt. Tarabai - Shri Prahladji, Bambori\nSmt. Guddibai - Shri Sureshji, Boheda\nSmt. Indubala - Shri Kamleshji, Dhariyawad\nSmt. Jyotidevi - Shri Dineshji, Satola\nSmt. Krishnadevi - Shri Kamleshji, Bansi\nSmt. Hemlata - Shri Rahulji, Chikarada\nSmt. Tina - Shri Vishnuji, Alod",
+                nanihalTitle: "Nanihal Paksh:", nanihalNames: "Shri Bagdiramji, Jagdishji, Laluramji, Madanji, Sureshji, Ramlalji, Chandrapalji, Prakashji, Rameshji Marotiya\n\nRes. Bhimlod",
+                baalTitle: "Baal Manuhaar", baalPoem: "Chhota sa dil hai, chhoti si hai aasha\nAap padharein saparivar yahi hai abhilasha.......\nMere bhaiya, uncle aur mama ki shaadi mein zaroor zaroor padharna......",
+                baalNames: "Jyoti, Priyanka, Anjali, Vishakha, Kinjal, Pranita, Tinkle, Piyu, Janhvi, Minakshi, Divya, Indra, Gunjan, Sonpari, Anu, Jiya, Prince",
+                footerWelcome: "We look forward to welcoming you", footerSign: "With Best Compliments", footerFamily: "The Jagnath Family", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
+            }
+        };
+
+        // State Variables
+        let currentLang = 'hi';
+        let isMuted = true;
+        let hasEntered = false;
+        const audio = document.getElementById('bg-audio');
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Scroll Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function observeElements() {
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // Language Logic
+        function updateLanguage() {
+            const c = content[currentLang];
+            const fontClassToAdd = currentLang === 'hi' ? 'font-hindi' : 'font-cinzel';
+            const fontClassToRemove = currentLang === 'hi' ? 'font-cinzel' : 'font-hindi';
+            
+            // Update static texts
+            for (const key in c) {
+                if (key === 'events') continue; // handled separately
+                const el = document.getElementById('t-' + key);
+                if (el) {
+                    if (c[key] === "") {
+                        el.style.display = "none";
+                    } else {
+                        el.style.display = "";
+                        if(key === 'openBtn' || key === 'getDirections') {
+                            el.childNodes[0].nodeValue = c[key] + " ";
+                        } else {
+                            // Use textContent with replacement to ensure newline characters (\n) are rendered
+                            el.innerText = c[key].replace(/\\n/g, '\n');
+                        }
+                    }
+                }
+            }
+
+            // Update typography classes
+            document.querySelectorAll('.dyn-font').forEach(el => {
+                el.classList.remove(fontClassToRemove);
+                el.classList.add(fontClassToAdd);
+            });
+            document.querySelectorAll('.dyn-btn-font').forEach(el => {
+                if(currentLang === 'en') {
+                    el.classList.remove('font-hindi', 'text-lg');
+                    el.classList.add('font-cinzel', 'tracking-[0.2em]', 'uppercase', 'text-sm');
+                } else {
+                    el.classList.remove('font-cinzel', 'tracking-[0.2em]', 'uppercase', 'text-sm');
+                    el.classList.add('font-hindi', 'text-lg');
+                }
+            });
+
+            // Update Indicator texts
+            document.getElementById('lang-indicator').innerText = currentLang === 'hi' ? 'EN' : 'HI';
+            if (currentLang === 'hi') {
+                document.getElementById('splash-en').classList.replace('font-bold', 'opacity-50');
+                document.getElementById('splash-en').classList.remove('opacity-100');
+                document.getElementById('splash-hi').classList.replace('opacity-50', 'font-bold');
+                document.getElementById('splash-hi').classList.add('opacity-100');
+            } else {
+                document.getElementById('splash-hi').classList.replace('font-bold', 'opacity-50');
+                document.getElementById('splash-hi').classList.remove('opacity-100');
+                document.getElementById('splash-en').classList.replace('opacity-50', 'font-bold');
+                document.getElementById('splash-en').classList.add('opacity-100');
+            }
+
+            // Render Events Timeline dynamically
+            const eventsHtml = c.events.map((ev, i) => `
+                <div class="fade-in ${i % 2 === 0 ? 'dir-right' : 'dir-left'} relative flex items-center md:justify-between ${i % 2 === 0 ? 'md:flex-row-reverse' : ''}">
+                    <!-- Timeline Dot -->
+                    <div class="absolute left-6 md:left-1/2 w-10 h-10 rounded-full bg-[#3A0B13] border-2 border-[#D4AF37] flex items-center justify-center -translate-x-1/2 z-10 shadow-[0_0_20px_rgba(212,175,55,0.5)]">
+                        <div class="w-3 h-3 bg-[#D4AF37] rounded-full"></div>
+                    </div>
+                    <!-- Content Card -->
+                    <div class="w-full md:w-[45%] pl-16 md:pl-0 ${i % 2 === 0 ? 'md:pl-16' : 'md:pr-16 md:text-right'}">
+                        <div class="group p-6 md:p-8 rounded-lg transition-all duration-300 hover:-translate-y-2 relative overflow-hidden ${
+                            ev.highlight 
+                            ? 'bg-gradient-to-br from-[#5C1220] to-[#3A0B13] border border-[#D4AF37] shadow-[0_15px_40px_rgba(212,175,55,0.2)]' 
+                            : 'bg-[#5C1220]/40 border border-[#D4AF37]/30 hover:border-[#D4AF37]/80 backdrop-blur-sm'
+                        }">
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.15)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            
+                            <div class="flex items-center gap-4 mb-5 ${i % 2 !== 0 ? 'md:justify-end' : ''}">
+                                <div class="p-3 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] shadow-inner ${i % 2 !== 0 ? 'md:order-last' : ''}">
+                                    <i data-lucide="${ev.icon}" class="w-5 h-5"></i>
+                                </div>
+                                <h3 class="${fontClassToAdd} text-2xl md:text-3xl text-[#D4AF37]">${ev.title}</h3>
+                            </div>
+                            
+                            <div class="space-y-3 text-[#FAF9F6]/90 ${fontClassToAdd} text-lg flex flex-col ${i % 2 !== 0 ? 'md:items-end' : ''}">
+                                <div class="flex items-center gap-3 bg-[#3A0B13]/30 px-4 py-2 rounded-full w-fit">
+                                    <i data-lucide="calendar" class="w-4 h-4 text-[#D4AF37]"></i>
+                                    <span>${ev.date}</span>
+                                </div>
+                                <div class="flex items-center gap-3 bg-[#3A0B13]/30 px-4 py-2 rounded-full w-fit">
+                                    <i data-lucide="clock" class="w-4 h-4 text-[#D4AF37]"></i>
+                                    <span>${ev.time}</span>
+                                </div>
+                                ${ev.description ? `<p class="mt-4 pt-4 border-t border-[#D4AF37]/20 text-sm md:text-base text-[#D4AF37]/90 leading-relaxed ${i % 2 !== 0 ? 'text-right' : 'text-left'}">${ev.description}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('events-container').innerHTML = eventsHtml;
+            
+            // Re-initialize icons and observers for dynamically added content
+            lucide.createIcons();
+            if(hasEntered) observeElements(); 
+        }
+
+        function toggleLang() {
+            currentLang = currentLang === 'hi' ? 'en' : 'hi';
+            updateLanguage();
+        }
+
+        // Interactions
+        function handleEnter() {
+            hasEntered = true;
+            isMuted = false;
+            
+            audio.volume = 0.4;
+            audio.play().catch(e => console.log("Audio play blocked until interaction:", e));
+
+            const splash = document.getElementById('splash-screen');
+            const main = document.getElementById('main-content');
+            const particles = document.getElementById('particles-container');
+            const controls = document.getElementById('main-controls');
+            
+            // Hide Splash
+            splash.classList.remove('opacity-100');
+            splash.classList.add('opacity-0', 'pointer-events-none', '-translate-y-10', 'scale-105');
+            document.getElementById('splash-lang-btn').style.display = 'none';
+
+            // Show Main Content
+            setTimeout(() => {
+                main.classList.remove('hidden');
+                particles.classList.remove('hidden');
+                controls.classList.remove('hidden');
+                controls.classList.add('flex');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                observeElements(); // Start observing scroll
+            }, 500);
+        }
+
+        function toggleMusic() {
+            const icon = document.getElementById('music-icon');
+            if (isMuted) {
+                audio.play();
+                icon.setAttribute('data-lucide', 'music-2');
+                icon.classList.add('animate-pulse');
+            } else {
+                audio.pause();
+                icon.setAttribute('data-lucide', 'music');
+                icon.classList.remove('animate-pulse');
+            }
+            lucide.createIcons();
+            isMuted = !isMuted;
+        }
+
+        // Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        const cursorInner = document.getElementById('cursor-inner');
+        
+        window.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate(${e.clientX - 16}px, ${e.clientY - 16}px)`;
+        });
+
+        document.addEventListener('mouseover', e => {
+            if (e.target.closest('button, a, .cursor-pointer')) {
+                cursorInner.classList.replace('scale-100', 'scale-150');
+            } else {
+                cursorInner.classList.replace('scale-150', 'scale-100');
+            }
+        });
+
+        // Generate Floating Particles
+        const pCont = document.getElementById('particles-container');
+        for (let i = 0; i < 25; i++) {
+            let p = document.createElement('div');
+            p.className = 'absolute bottom-[-10%] rounded-full bg-[#D4AF37]/40 blur-[1px]';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.width = p.style.height = (2 + Math.random() * 5) + 'px';
+            p.style.animation = `floatUp ${10 + Math.random() * 20}s linear ${Math.random() * 5}s infinite`;
+            pCont.appendChild(p);
+        }
+
+        // Init Data
+        updateLanguage();
+
+    </script>
+</body>
+</html>
