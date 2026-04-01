@@ -104,7 +104,7 @@
     <div class="bg-noise"></div>
     <div id="particles-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden hidden"></div>
     
-    <audio id="bg-audio" loop src="https://cdn.pixabay.com/download/audio/2022/01/26/audio_0313f83eb0.mp3?filename=indian-flute-and-tabla-115312.mp3"></audio>
+    <audio id="bg-audio" loop src="Indian 1.wav"></audio>
 
     <!-- Persistent Royal Frame -->
     <div class="fixed inset-3 md:inset-5 border-[1px] border-[#D4AF37]/30 pointer-events-none z-40 rounded-sm">
@@ -116,55 +116,63 @@
     <div class="fixed inset-4 md:inset-6 border-[1px] border-[#D4AF37]/10 pointer-events-none z-40 rounded-sm"></div>
 
     <!-- Floating Controls (Visible after enter) -->
-    <div id="main-controls" class="fixed bottom-8 right-8 z-50 flex-col gap-4 hidden">
-        <button onclick="toggleLang()" class="p-4 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] flex items-center justify-center font-cinzel text-sm font-bold" title="Switch Language">
+    <div id="main-controls" class="fixed bottom-12 right-6 md:bottom-12 md:right-10 z-[100] flex-col gap-3 hidden">
+        <button onclick="toggleLang()" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-105 transition-transform duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2)] flex items-center justify-center font-cinzel text-xs md:text-sm font-bold" title="Switch Language">
             <span id="lang-indicator">EN</span>
         </button>
-        <button onclick="toggleMusic()" class="p-4 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-            <i data-lucide="music-2" id="music-icon" class="w-5 h-5 animate-pulse"></i>
+        <button onclick="toggleMusic()" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#3A0B13] border border-[#D4AF37]/50 text-[#D4AF37] hover:scale-105 transition-transform duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2)] flex items-center justify-center">
+            <i data-lucide="music-2" id="music-icon" class="w-4 h-4 md:w-5 md:h-5 animate-pulse"></i>
         </button>
     </div>
 
     <!-- Language Switcher on Splash Screen -->
-    <button id="splash-lang-btn" onclick="toggleLang()" class="absolute top-8 right-8 z-[60] px-4 py-2 rounded-full border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 flex items-center gap-3 bg-[#3A0B13]/50 backdrop-blur-sm shadow-lg">
-        <i data-lucide="languages" class="w-4 h-4"></i>
-        <div class="flex items-center gap-2 text-sm">
+    <button id="splash-lang-btn" onclick="toggleLang()" class="absolute top-5 right-4 md:top-8 md:right-8 z-[60] px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 flex items-center gap-2 bg-[#3A0B13]/80 backdrop-blur-sm shadow-lg">
+        <svg class="w-3 h-3 md:w-4 md:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+        </svg>
+        <div class="flex items-center gap-1.5 text-[10px] md:text-xs tracking-wider">
             <span id="splash-en" class="font-cinzel opacity-50">EN</span>
-            <span class="w-px h-3 bg-[#D4AF37]/50"></span>
+            <span class="w-px h-2.5 bg-[#D4AF37]/50"></span>
             <span id="splash-hi" class="font-hindi font-bold opacity-100">हि</span>
         </div>
     </button>
 
     <!-- SPLASH SCREEN -->
     <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#3A0B13] transition-all duration-[1500ms] ease-in-out opacity-100">
-        <!-- Glowing mandala -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-10 overflow-hidden">
-            <svg class="w-[150vw] h-[150vw] md:w-[80vw] md:h-[80vw] text-[#D4AF37] mandala-spin" viewBox="0 0 100 100">
-                <path fill="currentColor" d="M50 0 L55 45 L100 50 L55 55 L50 100 L45 55 L0 50 L45 45 Z" />
-                <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="0.5" />
-                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="0.2" />
+        <!-- New Elegant Cross & Circle Background -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.08] pointer-events-none">
+            <svg class="w-[120vw] h-[120vw] md:w-[50vw] md:h-[50vw]" viewBox="0 0 200 200" fill="none" stroke="#D4AF37" stroke-width="0.3">
+                <circle cx="100" cy="100" r="70" />
+                <line x1="15" y1="15" x2="185" y2="185" />
+                <line x1="185" y1="15" x2="15" y2="185" />
             </svg>
         </div>
 
-        <div class="relative z-10 flex flex-col items-center text-center px-6">
-            <div class="text-[#D4AF37] mb-6 animate-pulse">
-                <i data-lucide="sparkles" class="w-8 h-8 md:w-12 md:h-12" stroke-width="1"></i>
+        <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 w-full h-full">
+            <!-- Top Star Icon -->
+            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" stroke="#D4AF37" stroke-width="2" class="mb-8 opacity-90">
+                <path d="M50 10 Q50 50 10 50 Q50 50 50 90 Q50 50 90 50 Q50 50 50 10 Z" />
+                <circle cx="65" cy="35" r="4" />
+            </svg>
+            
+            <h2 id="t-ganesh" class="dyn-font font-hindi text-lg md:text-2xl text-[#D4AF37] mb-6 tracking-widest opacity-90">|| श्री गणेशाय नमः ||</h2>
+            
+            <h1 id="t-title" class="dyn-font font-hindi text-4xl md:text-6xl text-[#FAF9F6] mb-12 tracking-wide drop-shadow-lg leading-normal py-2">मंगल परिणयोत्सव</h1>
+            
+            <div class="w-full max-w-sm mx-auto relative mb-10">
+                <!-- Background Horizontal Line -->
+                <div class="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent -translate-y-1/2"></div>
+                
+                <h3 id="t-groomFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient mb-5 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal relative bg-[#3A0B13] inline-block px-4">चि. मोहन (मोनु)</h3>
+                <div class="font-cinzel text-2xl md:text-3xl text-[#FAF9F6]/50 mb-5 relative bg-[#3A0B13] inline-block px-2 italic">&</div>
+                <h3 id="t-brideFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal relative bg-[#3A0B13] inline-block px-4">सौ. का. संगीता</h3>
             </div>
-            
-            <h2 id="t-ganesh" class="dyn-font font-hindi text-xl md:text-3xl text-[#D4AF37] mb-6 tracking-widest opacity-90">|| श्री गणेशाय नमः ||</h2>
-            <h1 id="t-title" class="dyn-font font-hindi text-4xl md:text-6xl text-[#FAF9F6] mb-8 tracking-wide drop-shadow-lg leading-normal py-2">मंगल परिणयोत्सव</h1>
-            
-            <div class="h-px w-32 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mb-8"></div>
-            
-            <h3 id="t-groomFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient mb-4 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal">चि. मोहन (मोनु)</h3>
-            <span class="font-cinzel text-xl text-[#FAF9F6]/60 mb-4">&</span>
-            <h3 id="t-brideFullName" class="dyn-font font-hindi text-3xl md:text-5xl text-gold-gradient mb-12 drop-shadow-[0_2px_10px_rgba(212,175,55,0.3)] py-2 leading-normal">सौ. का. संगीता</h3>
 
-            <p id="t-inviteLine" class="dyn-font font-hindi text-lg md:text-xl text-[#FAF9F6]/80 mb-12 max-w-sm leading-relaxed">आप सपरिवार सादर आमंत्रित हैं</p>
+            <p id="t-inviteLine" class="dyn-font font-hindi text-base md:text-xl text-[#FAF9F6]/80 mb-12 max-w-sm leading-relaxed">आप सपरिवार सादर आमंत्रित हैं</p>
 
-            <button onclick="handleEnter()" class="group relative px-8 py-4 bg-transparent border border-[#D4AF37] text-[#D4AF37] overflow-hidden rounded-sm transition-all duration-500 hover:border-[#FAF9F6]" style="animation: pulse-glow 3s infinite">
-                <div class="absolute inset-0 bg-[#D4AF37] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
-                <span class="relative z-10 font-hindi text-lg group-hover:text-[#3A0B13] transition-colors duration-500 flex items-center gap-3 dyn-btn-font" id="t-openBtn">
+            <button onclick="handleEnter()" class="group relative px-8 py-3 bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] overflow-hidden transition-all duration-500 hover:border-[#D4AF37] hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] rounded-sm">
+                <div class="absolute inset-0 bg-[#D4AF37]/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+                <span class="relative z-10 font-hindi text-lg transition-colors duration-500 flex items-center gap-3 dyn-btn-font" id="t-openBtn">
                     निमंत्रण खोलें <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </span>
             </button>
@@ -209,10 +217,10 @@
                 </div>
             </div>
             
-            <!-- Fixed Scroll Indicator to be perfectly centered despite letter tracking -->
-            <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center gap-2 animate-bounce opacity-70">
-                <span class="font-cinzel text-[#D4AF37] text-xs tracking-widest pl-[0.1em]">SCROLL</span>
-                <div class="w-[1px] h-12 bg-gradient-to-b from-[#D4AF37] to-transparent"></div>
+            <!-- Perfectly Centered Scroll Indicator -->
+            <div class="absolute bottom-8 md:bottom-12 w-full flex flex-col items-center justify-center gap-3 animate-bounce opacity-70">
+                <span class="font-cinzel text-[#D4AF37] text-[10px] md:text-xs tracking-[0.3em] ml-[0.3em]">SCROLL</span>
+                <div class="w-[1px] h-10 md:h-14 bg-gradient-to-b from-[#D4AF37] to-transparent"></div>
             </div>
         </section>
 
@@ -451,9 +459,9 @@
                     { title: "बिन्दोली", date: "25-04-2026", time: "शाम 8 बजे", icon: "music" },
                     { title: "बारात प्रस्थान", date: "26-04-2026", time: "प्रातः 7 बजे", icon: "users", description: "ब्याई जी. सा. श्री मोहनलालजी, चम्पालालजी, च. जगदीशजी, दिनेशजी, च. प्रकाशजी, गोविन्दजी साड़ीवाल (प्रजापत) निवासी- पारसोली के यहाँ जायेगी।" },
                     { title: "शुभ विवाह", date: "26-04-2026", time: "प्रातः 8 बजे", icon: "heart", highlight: true },
-                    { title: "आशीर्वाद समारोह व स्वरुचिभोज", date: "27-04-2026", time: "सायं 5 बजे से", icon: "utensils", description: "स्थान: कंचन वाटिका, मॉडल स्कूल रोड, बड़ी सदरी, राजस्थान" }
+                    { title: "आशीर्वाद समारोह व स्वरुचिभोज", date: "27-04-2026", time: "सायं 5 बजे से", icon: "utensils", description: "स्थान: कंचन वाटिका, मॉडल स्कूल रोड, बड़ी सादड़ी, राजस्थान", highlight: true }
                 ],
-                venueTitle: "विवाह स्थल", venueAddress: "कंचन वाटिका, मॉडल स्कूल रोड, बड़ी सदरी, राजस्थान", getDirections: "रास्ता देखें",
+                venueTitle: "विवाह स्थल", venueAddress: "कंचन वाटिका, मॉडल स्कूल रोड, बड़ी सादड़ी, राजस्थान", getDirections: "रास्ता देखें",
                 note1: "आपकी उपस्थिति हमारे लिए सौभाग्य होगी,", note2: "कृपया पधारकर नवविवाहित जोड़े को", note3: "आशीर्वाद प्रदान करें",
                 vineetTitle: "विनीत:", vineetNames: "नारायणलाल, आसीराम, मोड़ीराम, उदयलाल, डालचन्द, शिवलाल जाजपुरा\n\nनि. इन्दिरा कॉलोनी, बड़ीसादड़ी",
                 darshanTitle: "दर्शनाभिलाषी:", darshanNames: "ऊँकारलाल, नरेशकुमार, मांगीलाल, सुनिल, प्रकाश, हिरालाल, नानालाल, धर्मेन्द्र, पुष्कर, गोपाल, किशन, ललित, च. लोकेश, अक्षय, विकास, मयंक, हरिश, अमित, भूमित, योगेश, सुरज, कन्हैयालाल, प्रतिक, दक्ष, तनेश, शेखर, तरूण, लक्ष्यदीप\n\nएवं समस्त जाजपुरा (प्रजापत) परिवार।",
@@ -461,7 +469,7 @@
                 nanihalTitle: "ननिहाल पक्ष:", nanihalNames: "श्री बगदीरामजी, जगदीशजी, लालुरामजी, मदनजी, सुरेशजी, रामलालजी, चंद्रपालजी, प्रकाशजी, रमेशजी मारोटिया\n\nनिवासी- भीमलौद",
                 baalTitle: "बाल मनुहार", baalPoem: "छोटा सा दिल है, छोटी सी है आशा\nआप पधारें सपरिवार यही है अभिलाषा.......\nमेरे भैया व अंकल, मामा की शादी में जलूल-जलूल पधारना......",
                 baalNames: "ज्योति, प्रियंका, अंजली, विशाखा, किंजल, प्रणीता, टिंकल, पीयु, जान्हवी, मिनाक्षी, दिव्या, इन्द्रा, गुंजन, सोनपरी, अनु, जिया, प्रिन्स",
-                footerWelcome: "आपका स्वागत करने के लिए हम उत्सुक हैं", footerSign: "दर्शनाभिलाषी", footerFamily: "समस्त जगनाथ परिवार", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
+                footerWelcome: "आपका स्वागत करने के लिए हम उत्सुक हैं", footerSign: "दर्शनाभिलाषी", footerFamily: "समस्त जाजपुरा परिवार", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
             },
             en: {
                 ganesh: "|| Shri Ganeshay Namah ||", title: "The Grand Wedding", inviteLine: "You are cordially invited to celebrate", openBtn: "OPEN INVITATION",
@@ -483,7 +491,7 @@
                     { title: "Bindoli", date: "25-04-2026", time: "8:00 PM", icon: "music" },
                     { title: "Baraat Prasthan", date: "26-04-2026", time: "7:00 AM", icon: "users", description: "Proceeding to the residence of Shri Mohanlalji, Champalalji & family at Parsoli." },
                     { title: "Grand Wedding", date: "26-04-2026", time: "8:00 AM", icon: "heart", highlight: true },
-                    { title: "Aashirwad & Swaruchi Bhoj", date: "27-04-2026", time: "5:00 PM Onwards", icon: "utensils", description: "Venue: Kanchan Vatika, Model School Road, Badi Sadari, Rajasthan" }
+                    { title: "Aashirwad & Swaruchi Bhoj", date: "27-04-2026", time: "5:00 PM Onwards", icon: "utensils", description: "Venue: Kanchan Vatika, Model School Road, Badi Sadari, Rajasthan", highlight: true }
                 ],
                 venueTitle: "The Venue", venueAddress: "Kanchan Vatika, Model School Road, Badi Sadari, Rajasthan", getDirections: "GET DIRECTIONS",
                 note1: "Your presence will add to our joy,", note2: "Please join us to bless the", note3: "newlywed couple",
@@ -493,7 +501,7 @@
                 nanihalTitle: "Nanihal Paksh:", nanihalNames: "Shri Bagdiramji, Jagdishji, Laluramji, Madanji, Sureshji, Ramlalji, Chandrapalji, Prakashji, Rameshji Marotiya\n\nRes. Bhimlod",
                 baalTitle: "Baal Manuhaar", baalPoem: "Chhota sa dil hai, chhoti si hai aasha\nAap padharein saparivar yahi hai abhilasha.......\nMere bhaiya, uncle aur mama ki shaadi mein zaroor zaroor padharna......",
                 baalNames: "Jyoti, Priyanka, Anjali, Vishakha, Kinjal, Pranita, Tinkle, Piyu, Janhvi, Minakshi, Divya, Indra, Gunjan, Sonpari, Anu, Jiya, Prince",
-                footerWelcome: "We look forward to welcoming you", footerSign: "With Best Compliments", footerFamily: "The Jagnath Family", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
+                footerWelcome: "We look forward to welcoming you", footerSign: "With Best Compliments", footerFamily: "The Jajpura Family", crafted: "MADE WITH LOVE BY NYOTA INVITATION"
             }
         };
 
